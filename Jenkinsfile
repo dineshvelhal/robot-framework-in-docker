@@ -1,5 +1,6 @@
 //file:noinspection GroovyAssignabilityCheck
 pipeline {
+    agent none
 
     stages {
         stage('Robot Framework') {
