@@ -8,6 +8,7 @@ The final `Dockerfile` looks like this.
 
 <script src="https://gist.github.com/dineshvelhal/2f3a9db013c476264be9286a24b56dbf.js"></script>
 
+
 The Docker image is available in the Hub and can be pulled using the command:
 
 `docker image pull dineshvelhal/robot-framework:latest`
