@@ -4,9 +4,7 @@ Recently I was working on a Proof of Concept of using Robot Framework as part of
 
 ## Containerizing the Robot Framework
 Robot framework is based on Python, so obviously you need to start with the Python base image. I used the official Python 3.10 image from Docker Hub. Then I added the Robot Framework & its Selenium Library using the `pip` command. Then I created a directory `/working_dir` to act as default directory when mapping the scripts & reports from outside the container. Finally I set the `robot` command as the entrypoint. This enables the container to run `robot` command by default when it's instantiated. This last point is important if you want to quickly try running the tests from command line as part of `docker container run` command.
-The final `Dockerfile` looks like this.
-
-<script src="https://gist.github.com/dineshvelhal/2f3a9db013c476264be9286a24b56dbf.js"></script>
+The final `Dockerfile` looks like [this](Dockerfile).
 
 
 The Docker image is available in the Hub and can be pulled using the command:
