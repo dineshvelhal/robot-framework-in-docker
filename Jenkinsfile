@@ -12,8 +12,8 @@ pipeline {
             }
             steps {
                 sh 'robot ' +
-                        '--outputdir /working_dir/reports ' +
-                        '/working_dir/tests/basicChecks.robot'
+                        '--outputdir reports ' +
+                        'tests/basicChecks.robot'
             }
 //            post {
 //                always {
