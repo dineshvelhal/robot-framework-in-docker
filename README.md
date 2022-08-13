@@ -33,17 +33,51 @@ In this command, we are mapping the current directory (containing the tests) to 
 It's very easy to add the Robot tests to Jenkins pipeline by using the Docker agent. A typical stage in the pipeline looks like this:
 
 ```groovy
-stage('Robot Framework') {
-    agent {
-        docker {
-            image 'dineshv/robotframework:latest'
-            args '--entrypoint=""'
+    stage('Robot Framework') {
+        agent {
+            docker {
+                image 'dineshv/robotframework:latest'
+                args '--entrypoint=""'
+            }
+        }
+        steps {
+            sh 'robot --outputdir reports tests/basicChecks.robot'
         }
     }
-    steps {
-        sh 'robot --outputdir reports tests/basicChecks.robot'
-    }
-}
 ```
+The `--entrypoint=""` argument is required for overriding the default robot invocation when the container starts. Jenkins takes care of robot command invocation as part of the `steps` execution.
+You can install the Robot Framework Jenkins plugin for detailed reporting in the Jenkins builds. For that, open the Jenkins UI and go to `Dashboard --> Manage jenkins --> Available Plugins tab` and then searching & installing the Robot Framework Plugin. 
+Once installed, you can make use of it in the pipeline `post`/`always` step as hown below:
+```groovy
+    stage('Robot Framework') {
+        agent {
+            docker {
+                image 'dineshv/robotframework:latest'
+                args '--entrypoint=""'
+            }
+        }
+        steps {
+            sh 'robot --outputdir reports tests/basicChecks.robot'
+        }
+    }
+    post {
+        always {
+            step(
+                    [
+                            $class              : 'RobotPublisher',
+                            outputPath          : 'reports',
+                            outputFileName      : "output.xml",
+                            reportFileName      : 'report.html',
+                            logFileName         : 'log.html',
+                            disableArchiveOutput: true,
+                            passThreshold       : 95.0,
+                            unstableThreshold   : 90.0,
+                            otherFiles          : "**/*.png,**/*.jpg",
+                    ]
+            )
+        }
+    }
+```
+
 
 
