@@ -33,7 +33,17 @@ In this command, we are mapping the current directory (containing the tests) to 
 It's very easy to add the Robot tests to Jenkins pipeline by using the Docker agent. A typical stage in the pipeline looks like this:
 
 ```groovy
-
+stage('Robot Framework') {
+    agent {
+        docker {
+            image 'dineshv/robotframework:latest'
+            args '--entrypoint=""'
+        }
+    }
+    steps {
+        sh 'robot --outputdir reports tests/basicChecks.robot'
+    }
+}
 ```
 
 
