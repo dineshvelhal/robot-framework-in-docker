@@ -30,6 +30,10 @@ In this command, we are mapping the current directory (containing the tests) to 
 
 ## Running tests through Jenkins Pipeline
 
-__Work in Progress__
+It's very easy to add the Robot tests to Jenkins pipeline by using the Docker agent. A typical stage in the pipeline looks like this:
+
+```groovy
+
+```
 
 
