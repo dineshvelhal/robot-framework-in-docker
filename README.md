@@ -79,5 +79,8 @@ Once installed, you can make use of it in the pipeline `post`/`always` step as h
     }
 ```
 
+Sample report from Jenkins:
+![Jenkins Build](jenkins.JPG)
+
 
 
